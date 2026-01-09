@@ -1,0 +1,21 @@
+# build output
+dist
+build
+
+# dependencies
+node_modules
+
+# lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# env
+.env
+.env.*
+
+# generated
+coverage
+
+# markdown
+*.md
