@@ -6,6 +6,7 @@ Intersection Observer API를 사용하여 스크롤 하단을 감지하고, 전�
 <br/>
 더미 API를 활용해 실제 서비스와 유사한 데이터 로딩 경험을 제공합니다.
 
+<br/>
 
 ## 🎯 프로젝트 목표
 
@@ -16,10 +17,11 @@ Intersection Observer API를 사용하여 스크롤 하단을 감지하고, 전�
 - 유지보수성을 고려한 컴포넌트 및 폴더 구조 설계
 - 사용자 경험(UX)을 고려한 로딩 및 에러 안내
 
+<br/>
 
 ## 🖥️ 데모 설명
 
-[배포 링크](https://react-zustand-infinite-scroll.vercel.app/)
+[🔗 배포 링크](https://react-zustand-infinite-scroll.vercel.app/)
 <br/>
 
 - 최초 진입 시 포스트 10개를 불러옵니다.
@@ -28,6 +30,7 @@ Intersection Observer API를 사용하여 스크롤 하단을 감지하고, 전�
 - 데이터 로딩 중에는 로딩 UI가 표시됩니다.
 - API 에러 발생 시 사용자에게 알림 UI가 노출됩니다.
 
+<br/>
 
 ## ⚒️ 기술 스택
 
@@ -41,6 +44,7 @@ Intersection Observer API를 사용하여 스크롤 하단을 감지하고, 전�
 - **CSS** (Design Token 기반 스타일 관리)
 - **ESLint + Prettier**
 
+<br/>
 
 ## 📌 주요 기능
 
@@ -67,6 +71,7 @@ Intersection Observer API를 사용하여 스크롤 하단을 감지하고, 전�
 
 ✅ 컴포넌트 단위 분리 및 반응형 레이아웃 지원
 
+<br/>
 
 ## 📁 프로젝트 구조
 
@@ -116,6 +121,7 @@ Intersection Observer API를 사용하여 스크롤 하단을 감지하고, 전�
 ├── tsconfig.node.json
 └── vite.config.ts
 ```
+<br/>
 
 ## 🔐 환경 변수 설정
 
@@ -128,6 +134,8 @@ Intersection Observer API를 사용하여 스크롤 하단을 감지하고, 전�
 ```env
 VITE_API_BASE_URL=https://jsonplaceholder.typicode.com
 ```
+
+<br/>
 
 ## ▶️ 실행 방법
 
@@ -157,6 +165,8 @@ pnpm dev
 ```
 > 별도의 서버 설정 없이 Vite 개발 서버로 바로 실행됩니다!
 
+<br/>
+
 ## ✨ UX / 성능 고려 사항
 
 - Intersection Observer 사용으로 스크롤 이벤트 기반 처리보다 성능 최적화
@@ -167,6 +177,7 @@ pnpm dev
 
 - 모바일 / 데스크톱 환경 모두 자연스럽게 동작하는 반응형 레이아웃
 
+<br/>
 
 ## 🔗 ETC
 
