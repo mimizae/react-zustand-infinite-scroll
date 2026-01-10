@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { PostItem } from './post-item';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import { LoadingText } from '@/components/ui/loading-text';
 import { usePostStore } from '@/store/usePostStore';
 import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
 
@@ -34,7 +33,7 @@ export const PostList = () => {
       </div>
 
       {!error && isLoading && posts.length === 0 && <LoadingSpinner />}
-      {!error && isLoading && posts.length > 0 && <LoadingText />}
+      {!error && isLoading && posts.length > 0 && <LoadingSpinner size="post" />}
 
       {!hasMore && posts.length > 0 && (
         <p className="py-8 text-center text-lg sm:text-xl md:text-2xl text-gray-500">
