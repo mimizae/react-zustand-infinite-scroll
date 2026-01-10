@@ -13,7 +13,7 @@ export const PostList = () => {
   useInfiniteScroll({
     target: observerTarget,
     onIntersect: loadPosts,
-    enabled: hasMore && !isLoading,
+    enabled: hasMore && !isLoading && !error,
   });
 
   // 최초 진입 시 1페이지 로딩
@@ -33,8 +33,8 @@ export const PostList = () => {
         ))}
       </div>
 
-      {isLoading && posts.length === 0 && <LoadingSpinner />}
-      {isLoading && posts.length > 0 && <LoadingText />}
+      {!error && isLoading && posts.length === 0 && <LoadingSpinner />}
+      {!error && isLoading && posts.length > 0 && <LoadingText />}
 
       {!hasMore && posts.length > 0 && (
         <p className="py-8 text-center text-lg sm:text-xl md:text-2xl text-gray-500">
@@ -42,7 +42,9 @@ export const PostList = () => {
         </p>
       )}
 
-      {error && <div className="mt-6 rounded-lg bg-red-100 px-4 py-3 text-red-500">{error}</div>}
+      {error && posts.length === 0 && (
+        <div className="mt-6 rounded-lg bg-red-100 px-4 py-3 text-red-500">{error}</div>
+      )}
 
       <div ref={observerTarget} className="h-4" />
     </div>

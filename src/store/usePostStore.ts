@@ -20,16 +20,14 @@ export const usePostStore = create<PostState>((set, get) => ({
   error: null,
 
   loadPosts: async () => {
-    const { isLoading, hasMore, page, posts } = get();
-    if (isLoading || !hasMore) return;
+    const { isLoading, hasMore, page, posts, error } = get();
+
+    if (isLoading || !hasMore || error) return;
 
     set({ isLoading: true, error: null });
 
     try {
-      const newPosts = await getPostList({
-        page,
-        limit: 10,
-      });
+      const newPosts = await getPostList({ page, limit: 10 });
 
       set({
         posts: [...posts, ...newPosts],
@@ -41,8 +39,9 @@ export const usePostStore = create<PostState>((set, get) => ({
       set({
         error: 'Failed to load posts. Please try again.',
         isLoading: false,
+        hasMore: false,
       });
-      console.log(e);
+      console.log('Error:', e);
     }
   },
 }));
