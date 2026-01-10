@@ -6,10 +6,15 @@
 @import '@/styles/tokens/color.css';
 @import '@/styles/tokens/font.css';
 
+html,
+body {
+  overscroll-behavior: none; /* 바운스 효과 제거 */
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(5px);
   }
   to {
     opacity: 1;
