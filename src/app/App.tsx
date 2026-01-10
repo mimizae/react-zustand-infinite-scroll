@@ -1,7 +1,13 @@
+import { Header } from '@/components/layout/header';
+import { PostList } from '@/features/posts/post-list';
+
 function App() {
   return (
-    <div>
-      <p className=" text-[4rem] font-bold text-secondary-300">Tailwind OK</p>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <main>
+        <PostList />
+      </main>
     </div>
   );
 }

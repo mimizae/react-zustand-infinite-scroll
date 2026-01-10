@@ -1,19 +1,14 @@
+import type { Post } from '@/types/post';
 import { request } from './request';
 
-export interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-interface FetchPostsParams {
+interface GetPostListParams {
   page: number;
   limit: number;
 }
+type GetPostListResponse = Post[];
 
-export function fetchPosts({ page, limit }: FetchPostsParams) {
-  return request<Post[]>({
+export function getPostList({ page, limit }: GetPostListParams) {
+  return request<GetPostListResponse>({
     method: 'GET',
     url: '/posts',
     params: {
