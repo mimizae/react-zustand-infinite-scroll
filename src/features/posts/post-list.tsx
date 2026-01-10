@@ -1,56 +1,34 @@
 import { useRef, useEffect } from 'react';
 import { PostItem } from './post-item';
-import type { Post } from '@/types/post';
-import { LoadingSpinner, LoadingText } from '@/components/ui/loading-spinner';
 
-interface PostListProps {
-  posts: Post[];
-  isLoading: boolean;
-  hasMore: boolean;
-  error: string | null;
-  onLoadMore: () => void;
-}
+import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
+import { usePostStore } from '@/store/usePostStore';
+import { LoadingText } from '@/components/ui/loading-text';
 
-export const PostList = ({ posts, isLoading, hasMore, error, onLoadMore }: PostListProps) => {
+export const PostList = () => {
+  const { posts, isLoading, hasMore, error, loadPosts } = usePostStore();
+
   const observerTarget = useRef<HTMLDivElement>(null);
 
+  useInfiniteScroll({
+    target: observerTarget,
+    onIntersect: loadPosts,
+    enabled: hasMore && !isLoading,
+  });
+
+  // 최초 진입 시 1페이지 로딩
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !isLoading) {
-          onLoadMore();
-        }
-      },
-      { threshold: 0.1 },
-    );
-
-    const currentTarget = observerTarget.current;
-    if (currentTarget) {
-      observer.observe(currentTarget);
+    if (posts.length === 0) {
+      loadPosts();
     }
-
-    return () => {
-      if (currentTarget) {
-        observer.unobserve(currentTarget);
-      }
-    };
-  }, [hasMore, isLoading, onLoadMore]);
+  }, []);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="mx-auto max-w-4xl px-4 py-8">
       <div className="space-y-4">
-        {posts.length === 0 && !isLoading && !error && (
-          <div className="text-center py-12">
-            <p className="text-gray-300 text-lg">No posts found</p>
-          </div>
-        )}
-
-        {posts.map((post, index) => (
-          <div
-            key={`${post.id}-${index}`}
-            className="animate-fadeIn"
-            style={{ animationDelay: `${(index % 10) * 50}ms` }}
-          >
+        {posts.map((post) => (
+          <div key={post.id} className="animate-fadeIn">
             <PostItem post={post} />
           </div>
         ))}
@@ -59,16 +37,14 @@ export const PostList = ({ posts, isLoading, hasMore, error, onLoadMore }: PostL
       {isLoading && posts.length === 0 && <LoadingSpinner />}
       {isLoading && posts.length > 0 && <LoadingText />}
 
-      {!hasMore && posts.length > 0 && !error && (
-        <div className="text-center py-8">
-          <div className="inline-block bg-gray-50 rounded-full px-6 py-3">
-            <p className="text-gray-300 text-sm font-medium">🎉 You've reached the end!</p>
-            <p className="text-gray-300 text-xs mt-1">Total posts: {posts.length}</p>
-          </div>
-        </div>
+      {!hasMore && posts.length > 0 && (
+        <p className="py-8 text-center text-lg sm:text-xl md:text-2xl text-gray-500">
+          🎉 모든 포스트를 구경하셨네요! {posts.length}개의 포스트가 있었어요.
+        </p>
       )}
 
-      {/* Intersection Observer 타겟 */}
+      {error && <div className="mt-6 rounded-lg bg-red-100 px-4 py-3 text-red-500">{error}</div>}
+
       <div ref={observerTarget} className="h-4" />
     </div>
   );
