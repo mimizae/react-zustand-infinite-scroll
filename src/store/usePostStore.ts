@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { Post } from '@/types/post';
-import { fetchPosts } from '@/apis/post';
+import { getPostList } from '@/apis/post';
 
 interface PostState {
   posts: Post[];
@@ -26,7 +26,7 @@ export const usePostStore = create<PostState>((set, get) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const newPosts = await fetchPosts({
+      const newPosts = await getPostList({
         page,
         limit: 10,
       });
