@@ -8,11 +8,3 @@ export const LoadingSpinner = () => {
     </div>
   );
 };
-
-export const LoadingText = () => {
-  return (
-    <div className="flex justify-center items-center py-4">
-      <p className="text-gray-300 text-sm animate-pulse">로딩 중...</p>
-    </div>
-  );
-};
