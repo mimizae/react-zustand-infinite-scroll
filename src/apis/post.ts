@@ -5,9 +5,10 @@ interface GetPostListParams {
   page: number;
   limit: number;
 }
+type GetPostListResponse = Post[];
 
 export function getPostList({ page, limit }: GetPostListParams) {
-  return request<Post[]>({
+  return request<GetPostListResponse>({
     method: 'GET',
     url: '/posts',
     params: {
