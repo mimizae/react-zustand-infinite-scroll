@@ -16,7 +16,7 @@ export const PostList = () => {
     enabled: hasMore && !isLoading && !error,
   });
 
-  // 최초 진입 시 1페이지 로딩
+  // 최초 진입 시 페이지 1 로딩
   useEffect(() => {
     if (posts.length === 0) {
       loadPosts();
