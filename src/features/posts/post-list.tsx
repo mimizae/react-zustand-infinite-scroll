@@ -1,10 +1,9 @@
 import { useRef, useEffect } from 'react';
 import { PostItem } from './post-item';
-
-import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import { usePostStore } from '@/store/usePostStore';
 import { LoadingText } from '@/components/ui/loading-text';
+import { usePostStore } from '@/store/usePostStore';
+import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
 
 export const PostList = () => {
   const { posts, isLoading, hasMore, error, loadPosts } = usePostStore();
